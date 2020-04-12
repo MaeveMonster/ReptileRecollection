@@ -1,0 +1,17 @@
+My website is an expansion of DomoMaker. The purpose is for users to be able to keep a personal log of the super 
+cute reptiles they find throughout their days. They may give each reptile a name, age, and description. When the 
+project is finished the user will also be able to add pictures of the reptiles they find.
+
+The completed version of the website will have space for advertisements in the margins, and an option for the
+user to pay to remove the ads.
+
+React is being used to control the Reptiles that are being displayed.
+
+Mongo is being used to store Reptiles and Accounts.
+
+Handlebars is being used to form the framework of the app's pages.
+
+Going forward I will polish the site's asthetics and add the image feature, as well as add specifically marked
+areas for advertisements. There will also be a button marked "Remove Ads" in the top right corner of the app.
+Once the user clicks that button, all the 'ad spaces' will disappear and the app will look much cleaner and less 
+cluttered.
