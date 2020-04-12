@@ -1,180 +1,14 @@
 "use strict";
 
-var handleDomo = function handleDomo(e) {
-  e.preventDefault();
-  $("#domoMessage").animate({
-    width: 'hide'
-  }, 350);
-
-  if ($("#domoName").val() == '' || $("#domoAge").val() == '' || $("#domoTreats").val() == '') {
-    handleError("All fields are required");
-    return false;
-  }
-
-  sendAjax('POST', $("domoForm").attr("action"), $("#domoForm").serialize(), function () {
-    loadDomosFromServer();
-    loadHungriestDomo();
-  });
-  return false;
-};
-
-var DomoForm = function DomoForm(props) {
-  return (/*#__PURE__*/React.createElement("form", {
-      id: "domoForm",
-      onSubmit: handleDomo,
-      name: "domoForm",
-      action: "/maker",
-      method: "POST",
-      className: "domoForm"
-    }, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "name"
-    }, "Name: "), /*#__PURE__*/React.createElement("input", {
-      id: "domoName",
-      type: "text",
-      name: "name",
-      placeholder: "Domo Name"
-    }), /*#__PURE__*/React.createElement("label", {
-      htmlFor: "age"
-    }, "Age: "), /*#__PURE__*/React.createElement("input", {
-      id: "domoAge",
-      type: "text",
-      name: "age",
-      placeholder: "Domo Age"
-    }), /*#__PURE__*/React.createElement("label", {
-      htmlFor: "treats"
-    }, "Treats: "), /*#__PURE__*/React.createElement("input", {
-      id: "domoTreats",
-      type: "text",
-      name: "treats",
-      placeholder: "Domo Treats"
-    }), /*#__PURE__*/React.createElement("input", {
-      type: "hidden",
-      name: "_csrf",
-      value: props.csrf
-    }), /*#__PURE__*/React.createElement("input", {
-      className: "makeDomoSubmit",
-      type: "submit",
-      value: "Make Domo"
-    }))
-  );
-};
-
-var DomoList = function DomoList(props) {
-  if (props.domos.length === 0) {
-    return (/*#__PURE__*/React.createElement("div", {
-        className: "domoList"
-      }, /*#__PURE__*/React.createElement("h3", {
-        className: "emptyDomo"
-      }, "No Domos yet"))
-    );
-  }
-
-  var domoNodes = props.domos.map(function (domo) {
-    return (/*#__PURE__*/React.createElement("div", {
-        key: domo._id,
-        className: "domo"
-      }, /*#__PURE__*/React.createElement("img", {
-        src: "/assets/img/domoface.jpeg",
-        alt: "domo face",
-        className: "domoFace"
-      }), /*#__PURE__*/React.createElement("h3", {
-        className: "domoName"
-      }, " Name: ", domo.name, " "), /*#__PURE__*/React.createElement("h3", {
-        className: "domoAge"
-      }, " Age: ", domo.age, " "), /*#__PURE__*/React.createElement("h3", {
-        className: "domoTreats"
-      }, " Treats: ", domo.treats, " "))
-    );
-  });
-  return (/*#__PURE__*/React.createElement("div", {
-      className: "domoList"
-    }, /*#__PURE__*/React.createElement("h2", null, "My Domo List:"), domoNodes)
-  );
-};
-
-var HungriestDomoList = function HungriestDomoList(props) {
-  if (props.domos.length === 0) {
-    return (/*#__PURE__*/React.createElement("div", {
-        className: "domoList"
-      }, /*#__PURE__*/React.createElement("h3", {
-        className: "emptyDomo"
-      }, "No Domos yet"))
-    );
-  }
-
-  var domoNodes = props.domos.map(function (domo) {
-    return (/*#__PURE__*/React.createElement("div", {
-        key: domo._id,
-        className: "domo"
-      }, /*#__PURE__*/React.createElement("img", {
-        src: "/assets/img/domoface.jpeg",
-        alt: "domo face",
-        className: "domoFace"
-      }), /*#__PURE__*/React.createElement("h3", {
-        className: "domoName"
-      }, " Name: ", domo.name, " "), /*#__PURE__*/React.createElement("h3", {
-        className: "domoAge"
-      }, " Age: ", domo.age, " "), /*#__PURE__*/React.createElement("h3", {
-        className: "domoTreats"
-      }, " Treats: ", domo.treats, " "))
-    );
-  });
-  return (/*#__PURE__*/React.createElement("div", {
-      className: "domoList"
-    }, /*#__PURE__*/React.createElement("h2", null, "World's Hungriest Domo:"), domoNodes)
-  );
-};
-
-var loadDomosFromServer = function loadDomosFromServer() {
-  sendAjax('GET', '/getDomos', null, function (data) {
-    ReactDOM.render( /*#__PURE__*/React.createElement(DomoList, {
-      domos: data.domos
-    }), document.querySelector("#domos"));
-  });
-};
-
-var loadHungriestDomo = function loadHungriestDomo() {
-  sendAjax('GET', '/getHungriestDomo', null, function (data) {
-    ReactDOM.render( /*#__PURE__*/React.createElement(HungriestDomoList, {
-      domos: data.domos
-    }), document.querySelector("#hungriestDomo"));
-  });
-};
-
-var setup = function setup(csrf) {
-  ReactDOM.render( /*#__PURE__*/React.createElement(DomoForm, {
-    csrf: csrf
-  }), document.querySelector("#makeDomo"));
-  ReactDOM.render( /*#__PURE__*/React.createElement(DomoList, {
-    domos: []
-  }), document.querySelector("#domos"));
-  ReactDOM.render( /*#__PURE__*/React.createElement(HungriestDomoList, {
-    domos: []
-  }), document.querySelector("#hungriestDomo"));
-  loadDomosFromServer();
-  loadHungriestDomo();
-};
-
-var getToken = function getToken() {
-  sendAjax('GET', '/getToken', null, function (result) {
-    setup(result.csrfToken);
-  });
-};
-
-$(document).ready(function () {
-  getToken();
-});
-"use strict";
-
 var handleError = function handleError(message) {
   $("#errorMessage").text(message);
-  $("#domoMessage").animate({
+  $("#reptileMessage").animate({
     width: 'toggle'
   }, 350);
 };
 
 var redirect = function redirect(response) {
-  $("domoMessage").animate({
+  $("reptileMessage").animate({
     width: 'hide'
   }, 350);
   window.location = response.redirect;
@@ -194,3 +28,128 @@ var sendAjax = function sendAjax(type, action, data, success) {
     }
   });
 };
+"use strict";
+
+var handleReptile = function handleReptile(e) {
+  e.preventDefault();
+  $("#reptileMessage").animate({
+    width: 'hide'
+  }, 350);
+
+  if ($("#reptileName").val() == '' || $("#reptileAge").val() == '' || $("#reptileDescription").val() == '') {
+    handleError("All fields are required");
+    return false;
+  }
+
+  sendAjax('POST', $("reptileForm").attr("action"), $("#reptileForm").serialize(), function () {
+    loadReptilesFromServer();
+  });
+  return false;
+};
+
+var ReptileForm = function ReptileForm(props) {
+  return (/*#__PURE__*/React.createElement("form", {
+      id: "reptileForm",
+      onSubmit: handleReptile,
+      name: "reptileForm",
+      action: "/maker",
+      method: "POST",
+      className: "reptileForm",
+      style: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center'
+      }
+    }, /*#__PURE__*/React.createElement("label", {
+      htmlFor: "name"
+    }, "Name: "), /*#__PURE__*/React.createElement("input", {
+      id: "reptileName",
+      type: "text",
+      name: "name",
+      placeholder: "Reptile Name"
+    }), /*#__PURE__*/React.createElement("label", {
+      htmlFor: "age"
+    }, "Age: "), /*#__PURE__*/React.createElement("input", {
+      id: "reptileAge",
+      type: "text",
+      name: "age",
+      placeholder: "Reptile Age"
+    }), /*#__PURE__*/React.createElement("label", {
+      htmlFor: "description"
+    }, "Description: "), /*#__PURE__*/React.createElement("input", {
+      id: "reptileDescription",
+      type: "text",
+      name: "description",
+      placeholder: "Reptile Description"
+    }), /*#__PURE__*/React.createElement("input", {
+      type: "hidden",
+      name: "_csrf",
+      value: props.csrf
+    }), /*#__PURE__*/React.createElement("input", {
+      className: "makeReptileSubmit",
+      type: "submit",
+      value: "Make Reptile"
+    }))
+  );
+};
+
+var ReptileList = function ReptileList(props) {
+  if (props.reptiles.length === 0) {
+    return (/*#__PURE__*/React.createElement("div", {
+        className: "reptileList"
+      }, /*#__PURE__*/React.createElement("h3", {
+        className: "emptyReptile"
+      }, "No Reptiles yet"))
+    );
+  }
+
+  var reptileNodes = props.reptiles.map(function (reptile) {
+    return (/*#__PURE__*/React.createElement("div", {
+        key: reptile._id,
+        className: "reptile"
+      }, /*#__PURE__*/React.createElement("img", {
+        src: "/assets/img/iguana.jpg",
+        alt: "reptile face",
+        className: "reptileFace"
+      }), /*#__PURE__*/React.createElement("h3", {
+        className: "reptileName"
+      }, " Name: ", reptile.name, " "), /*#__PURE__*/React.createElement("h3", {
+        className: "reptileAge"
+      }, " Age: ", reptile.age, " "), /*#__PURE__*/React.createElement("h3", {
+        className: "reptileDescription"
+      }, " Description: ", reptile.description, " "))
+    );
+  });
+  return (/*#__PURE__*/React.createElement("div", {
+      className: "reptileList"
+    }, reptileNodes)
+  );
+};
+
+var loadReptilesFromServer = function loadReptilesFromServer() {
+  sendAjax('GET', '/getReptiles', null, function (data) {
+    ReactDOM.render( /*#__PURE__*/React.createElement(ReptileList, {
+      reptiles: data.reptiles
+    }), document.querySelector("#reptiles"));
+  });
+};
+
+var setup = function setup(csrf) {
+  ReactDOM.render( /*#__PURE__*/React.createElement(ReptileForm, {
+    csrf: csrf
+  }), document.querySelector("#makeReptile"));
+  ReactDOM.render( /*#__PURE__*/React.createElement(ReptileList, {
+    reptiles: []
+  }), document.querySelector("#reptiles"));
+  loadReptilesFromServer();
+};
+
+var getToken = function getToken() {
+  sendAjax('GET', '/getToken', null, function (result) {
+    setup(result.csrfToken);
+  });
+};
+
+$(document).ready(function () {
+  getToken();
+});

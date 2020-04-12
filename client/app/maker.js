@@ -1,129 +1,87 @@
-const handleDomo = (e) => {
+const handleReptile = (e) => {
     e.preventDefault();
     
-    $("#domoMessage").animate({width:'hide'}, 350);
+    $("#reptileMessage").animate({width:'hide'}, 350);
     
-    if($("#domoName").val() == '' || $("#domoAge").val() == '' || $("#domoTreats").val() == '') {
+    if($("#reptileName").val() == '' || $("#reptileAge").val() == '' || $("#reptileDescription").val() == '') {
         handleError("All fields are required");
         return false;
     }
     
-    sendAjax('POST', $("domoForm").attr("action"), $("#domoForm").serialize(), function() {
-        loadDomosFromServer();
-        loadHungriestDomo();
+    sendAjax('POST', $("reptileForm").attr("action"), $("#reptileForm").serialize(), function() {
+        loadReptilesFromServer();
     });
     
     return false;
 };
 
-const DomoForm = (props) => {
+const ReptileForm = (props) => {
     return (
-        <form id="domoForm"
-              onSubmit={handleDomo}
-              name="domoForm"
+        <form id="reptileForm"
+              onSubmit={handleReptile}
+              name="reptileForm"
               action="/maker"
               method="POST"
-              className="domoForm"
+              className="reptileForm"
+              style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}
         >
             <label htmlFor="name">Name: </label>
-            <input id="domoName" type="text" name="name" placeholder="Domo Name"/>
+            <input id="reptileName" type="text" name="name" placeholder="Reptile Name"/>
             <label htmlFor="age">Age: </label>
-            <input id="domoAge" type="text" name="age" placeholder="Domo Age"/>
-            <label htmlFor="treats">Treats: </label>
-            <input id="domoTreats" type="text" name="treats" placeholder="Domo Treats"/>
+            <input id="reptileAge" type="text" name="age" placeholder="Reptile Age"/>
+            <label htmlFor="description">Description: </label>
+            <input id="reptileDescription" type="text" name="description" placeholder="Reptile Description"/>
             <input type="hidden" name="_csrf" value={props.csrf} />
-            <input className="makeDomoSubmit" type="submit" value="Make Domo" />
+            <input className="makeReptileSubmit" type="submit" value="Make Reptile" />
         </form>
     );
 };
 
-const DomoList = function(props) {
-    if(props.domos.length === 0) {
+const ReptileList = function(props) {
+    if(props.reptiles.length === 0) {
         return (
-            <div className="domoList">
-                <h3 className="emptyDomo">No Domos yet</h3>
+            <div className="reptileList">
+                <h3 className="emptyReptile">No Reptiles yet</h3>
             </div>
         );
     }
     
-    const domoNodes = props.domos.map(function(domo) {
+    const reptileNodes = props.reptiles.map(function(reptile) {
         return (
-            <div key={domo._id} className="domo">
-                <img src="/assets/img/domoface.jpeg" alt="domo face" className="domoFace" />
-                <h3 className="domoName"> Name: {domo.name} </h3>
-                <h3 className="domoAge"> Age: {domo.age} </h3>
-                <h3 className="domoTreats"> Treats: {domo.treats} </h3>
+            <div key={reptile._id} className="reptile">
+                <img src="/assets/img/iguana.jpg" alt="reptile face" className="reptileFace" />
+                <h3 className="reptileName"> Name: {reptile.name} </h3>
+                <h3 className="reptileAge"> Age: {reptile.age} </h3>
+                <h3 className="reptileDescription"> Description: {reptile.description} </h3>
             </div>
         );
     });
     
     return (
-        <div className="domoList">
-            <h2>My Domo List:</h2>
-            {domoNodes}
+        <div className="reptileList">
+            {reptileNodes}
         </div>
     );
 }
 
-const HungriestDomoList = function(props) {
-    if(props.domos.length === 0) {
-        return (
-            <div className="domoList">
-                <h3 className="emptyDomo">No Domos yet</h3>
-            </div>
-        );
-    }
-    
-    const domoNodes = props.domos.map(function(domo) {
-        return (
-            <div key={domo._id} className="domo">
-                <img src="/assets/img/domoface.jpeg" alt="domo face" className="domoFace" />
-                <h3 className="domoName"> Name: {domo.name} </h3>
-                <h3 className="domoAge"> Age: {domo.age} </h3>
-                <h3 className="domoTreats"> Treats: {domo.treats} </h3>
-            </div>
-        );
-    });
-    
-    return (
-        <div className="domoList">
-            <h2>World's Hungriest Domo:</h2>
-            {domoNodes}
-        </div>
-    );
-}
-
-const loadDomosFromServer = () => {
-    sendAjax('GET', '/getDomos', null, (data) => {
+const loadReptilesFromServer = () => {
+    sendAjax('GET', '/getReptiles', null, (data) => {
         ReactDOM.render(
-            <DomoList domos={data.domos} />, document.querySelector("#domos")
-        );
-    });
-};
-
-const loadHungriestDomo = () => {
-    sendAjax('GET', '/getHungriestDomo', null, (data) => {
-        ReactDOM.render(
-            <HungriestDomoList domos={data.domos} />, document.querySelector("#hungriestDomo")
+            <ReptileList reptiles={data.reptiles} />, document.querySelector("#reptiles")
         );
     });
 };
 
 const setup = function(csrf) {
     ReactDOM.render(
-        <DomoForm csrf={csrf} />, document.querySelector("#makeDomo")
+        <ReptileForm csrf={csrf} />, document.querySelector("#makeReptile")
     );
     
     ReactDOM.render(
-        <DomoList domos={[]} />, document.querySelector("#domos")
+        <ReptileList reptiles={[]} />, document.querySelector("#reptiles")
     );
     
-    ReactDOM.render(
-        <HungriestDomoList domos={[]} />, document.querySelector("#hungriestDomo")
-    );
-    
-    loadDomosFromServer();
-    loadHungriestDomo();
+    loadReptilesFromServer();
 };
 
 const getToken = () => {
