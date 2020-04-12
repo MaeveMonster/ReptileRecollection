@@ -14,7 +14,7 @@ const csrf = require('csurf');
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
-const dbURL = process.env.MONGODB_URI || 'mongodb://localhost/ReptileMaker';
+const dbURL = process.env.MONGODB_URI || 'mongodb://localhost/ReptileRecollection';
 
 // Setup mongoose options to use newer functionality
 const mongooseOptions = {
