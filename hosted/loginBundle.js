@@ -1,38 +1,8 @@
 "use strict";
 
-var handleError = function handleError(message) {
-  $("#errorMessage").text(message);
-  $("#reptileMessage").animate({
-    width: 'toggle'
-  }, 350);
-};
-
-var redirect = function redirect(response) {
-  $("reptileMessage").animate({
-    width: 'hide'
-  }, 350);
-  window.location = response.redirect;
-};
-
-var sendAjax = function sendAjax(type, action, data, success) {
-  $.ajax({
-    cache: false,
-    type: type,
-    url: action,
-    data: data,
-    dataType: "json",
-    success: success,
-    error: function error(xhr, status, _error) {
-      var messageObj = JSON.parse(xhr.responseText);
-      handleError(messageObj.error);
-    }
-  });
-};
-"use strict";
-
 var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
 
-var _Button = _interopRequireDefault(require("../../node_modules/react-bootstrap/Button"));
+var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 
 require("bootstrap/dist/css/bootstrap.min.css");
 
@@ -160,3 +130,33 @@ var getToken = function getToken() {
 $(document).ready(function () {
   getToken();
 });
+"use strict";
+
+var handleError = function handleError(message) {
+  $("#errorMessage").text(message);
+  $("#reptileMessage").animate({
+    width: 'toggle'
+  }, 350);
+};
+
+var redirect = function redirect(response) {
+  $("reptileMessage").animate({
+    width: 'hide'
+  }, 350);
+  window.location = response.redirect;
+};
+
+var sendAjax = function sendAjax(type, action, data, success) {
+  $.ajax({
+    cache: false,
+    type: type,
+    url: action,
+    data: data,
+    dataType: "json",
+    success: success,
+    error: function error(xhr, status, _error) {
+      var messageObj = JSON.parse(xhr.responseText);
+      handleError(messageObj.error);
+    }
+  });
+};

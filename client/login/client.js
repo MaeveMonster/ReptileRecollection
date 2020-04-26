@@ -1,5 +1,5 @@
 import Form from 'react-bootstrap/Form';
-import Button from '../../node_modules/react-bootstrap/Button';
+import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
