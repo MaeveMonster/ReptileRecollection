@@ -37,26 +37,25 @@ const handleSignup = (e) => {
 
 const LoginWindow = (props) => {
     return (
-        <ReactBootstrap.Card>
-            <ReactBootstrap.Card.Body>
-                <ReactBootstrap.Form
-                    onSubmit={handleLogin}
-                    action="/login"
-                    method="POST"
-                    >
-                    <ReactBootstrap.Form.Group>
-                        <ReactBootstrap.Form.Label>Username</ReactBootstrap.Form.Label>
-                        <ReactBootstrap.Form.Control type="email" placeholder="Enter username"/>
-                    </ReactBootstrap.Form.Group>
-                    <ReactBootstrap.Form.Group>
-                        <ReactBootstrap.Form.Label>Password</ReactBootstrap.Form.Label>
-                        <ReactBootstrap.Form.Control type="password" placeholder="Enter password"/>
-                        <ReactBootstrap.Form.Control type="hidden" name="_csrf" value={props.csrf}/>
-                    </ReactBootstrap.Form.Group>
-                    <ReactBootstrap.Button variant="primary" type="submit">Submit</ReactBootstrap.Button>
-                </ReactBootstrap.Form>
-            </ReactBootstrap.Card.Body>
-        </ReactBootstrap.Card>
+        <ReactBootstrap.Form
+            id="loginForm" 
+            name="loginForm"
+            onSubmit={handleLogin}
+            action="/login"
+            method="POST"
+            className="mainForm"
+            >
+            <ReactBootstrap.Form.Group>
+                <ReactBootstrap.Form.Label>Username</ReactBootstrap.Form.Label>
+                <ReactBootstrap.Form.Control id="user" type="text" name="username" placeholder="username"/>
+            </ReactBootstrap.Form.Group>
+            <ReactBootstrap.Form.Group>
+                <ReactBootstrap.Form.Label>Password</ReactBootstrap.Form.Label>
+                <ReactBootstrap.Form.Control id="pass" type="password" name="pass" placeholder="password"/>
+                <ReactBootstrap.Form.Control type="hidden" name="_csrf" value={props.csrf}/>
+            </ReactBootstrap.Form.Group>
+            <ReactBootstrap.Button variant="primary" type="submit">Submit</ReactBootstrap.Button>
+        </ReactBootstrap.Form>
     );
 };
 
@@ -64,24 +63,27 @@ const SignupWindow = (props) => {
     return (
         <div id="content2">
             <ReactBootstrap.Form
+                id="signupForm"
+                name="signupForm"
                 onSubmit={handleSignup}
                 action="/signup"
                 method="POST"
+                classname="mainForm"
                 >
                 <ReactBootstrap.Form.Group>
                     <ReactBootstrap.Form.Label>Username</ReactBootstrap.Form.Label>
-                    <ReactBootstrap.Form.Control type="email" placeholder="Enter username"/>
+                    <ReactBootstrap.Form.Control id="user" type="text" name="username" placeholder="username"/>
                 </ReactBootstrap.Form.Group>
                 <ReactBootstrap.Form.Group>
                     <ReactBootstrap.Form.Label>Password</ReactBootstrap.Form.Label>
-                    <ReactBootstrap.Form.Control type="password" placeholder="Enter password"/>
+                    <ReactBootstrap.Form.Control id="pass" type="password" name="pass" placeholder="password"/>
                 </ReactBootstrap.Form.Group>
                 <ReactBootstrap.Form.Group>
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Enter password"/>
+                    <ReactBootstrap.Form.Label>Password</ReactBootstrap.Form.Label>
+                    <ReactBootstrap.Form.Control id="pass2" type="password" name="pass2" placeholder="retype password"/>
                 </ReactBootstrap.Form.Group>
                 <ReactBootstrap.Form.Control type="hidden" name="_csrf" value={props.csrf}/>
-                <ReactBootstrap.Button variant="primary" type="submit">Submit</ReactBootstrap.Button>
+                <ReactBootstrap.Button variant="primary"className="formSubmit" type="submit" value="Sign up">Submit</ReactBootstrap.Button>
             </ReactBootstrap.Form>
         </div>
 
