@@ -30,6 +30,14 @@ var sendAjax = function sendAjax(type, action, data, success) {
 };
 "use strict";
 
+var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
+
+var _Button = _interopRequireDefault(require("../../node_modules/react-bootstrap/Button"));
+
+require("bootstrap/dist/css/bootstrap.min.css");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
 var handleLogin = function handleLogin(e) {
   e.preventDefault();
   $("reptileMessage").animate({
@@ -67,79 +75,51 @@ var handleSignup = function handleSignup(e) {
 };
 
 var LoginWindow = function LoginWindow(props) {
-  return (/*#__PURE__*/React.createElement("form", {
-      id: "loginForm",
-      name: "loginForm",
+  return (/*#__PURE__*/React.createElement(_Form["default"], {
       onSubmit: handleLogin,
       action: "/login",
-      method: "POST",
-      className: "mainForm"
-    }, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "username"
-    }, "Username: "), /*#__PURE__*/React.createElement("input", {
-      id: "user",
-      type: "text",
-      name: "username",
-      placeholder: "username"
-    }), /*#__PURE__*/React.createElement("label", {
-      htmlFor: "pass"
-    }, "Password: "), /*#__PURE__*/React.createElement("input", {
-      id: "pass",
+      method: "POST"
+    }, /*#__PURE__*/React.createElement(_Form["default"].Group, null, /*#__PURE__*/React.createElement(_Form["default"].Label, null, "Username"), /*#__PURE__*/React.createElement(_Form["default"].Control, {
+      type: "email",
+      placeholder: "Enter username"
+    })), /*#__PURE__*/React.createElement(_Form["default"].Group, null, /*#__PURE__*/React.createElement(_Form["default"].Label, null, "Password"), /*#__PURE__*/React.createElement(_Form["default"].Control, {
       type: "password",
-      name: "pass",
-      placeholder: "password"
-    }), /*#__PURE__*/React.createElement("input", {
+      placeholder: "Enter password"
+    }), /*#__PURE__*/React.createElement(_Form["default"].Control, {
       type: "hidden",
       name: "_csrf",
       value: props.csrf
-    }), /*#__PURE__*/React.createElement("input", {
-      className: "formSubmit",
-      type: "submit",
-      value: "Sign in"
-    }))
+    })), /*#__PURE__*/React.createElement(_Button["default"], {
+      variant: "primary",
+      type: "submit"
+    }, "Submit"))
   );
 };
 
 var SignupWindow = function SignupWindow(props) {
   return (/*#__PURE__*/React.createElement("div", {
       id: "content2"
-    }, /*#__PURE__*/React.createElement("form", {
-      id: "signupForm",
-      name: "signupForm",
+    }, /*#__PURE__*/React.createElement(_Form["default"], {
       onSubmit: handleSignup,
       action: "/signup",
-      method: "POST",
-      classname: "mainForm"
-    }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "username"
-    }, "Username: "), /*#__PURE__*/React.createElement("input", {
-      id: "user",
-      type: "text",
-      name: "username",
-      placeholder: "username"
-    })), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "pass"
-    }, "Password: "), /*#__PURE__*/React.createElement("input", {
-      id: "pass",
+      method: "POST"
+    }, /*#__PURE__*/React.createElement(_Form["default"].Group, null, /*#__PURE__*/React.createElement(_Form["default"].Label, null, "Username"), /*#__PURE__*/React.createElement(_Form["default"].Control, {
+      type: "email",
+      placeholder: "Enter username"
+    })), /*#__PURE__*/React.createElement(_Form["default"].Group, null, /*#__PURE__*/React.createElement(_Form["default"].Label, null, "Password"), /*#__PURE__*/React.createElement(_Form["default"].Control, {
       type: "password",
-      name: "pass",
-      placeholder: "password"
-    })), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "pass2"
-    }, "Password: "), /*#__PURE__*/React.createElement("input", {
-      id: "pass2",
+      placeholder: "Enter password"
+    })), /*#__PURE__*/React.createElement(_Form["default"].Group, null, /*#__PURE__*/React.createElement(_Form["default"].Label, null, "Password"), /*#__PURE__*/React.createElement(_Form["default"].Control, {
       type: "password",
-      name: "pass2",
-      placeholder: "retype password"
-    })), /*#__PURE__*/React.createElement("input", {
+      placeholder: "Enter password"
+    })), /*#__PURE__*/React.createElement(_Form["default"].Control, {
       type: "hidden",
       name: "_csrf",
       value: props.csrf
-    }), /*#__PURE__*/React.createElement("input", {
-      className: "formSubmit",
-      type: "submit",
-      value: "Sign up"
-    })))
+    }), /*#__PURE__*/React.createElement(_Button["default"], {
+      variant: "primary",
+      type: "submit"
+    }, "Submit")))
   );
 };
 
