@@ -1,12 +1,34 @@
 "use strict";
 
-var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
+var handleError = function handleError(message) {
+  $("#errorMessage").text(message);
+  $("#reptileMessage").animate({
+    width: 'toggle'
+  }, 350);
+};
 
-var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
+var redirect = function redirect(response) {
+  $("reptileMessage").animate({
+    width: 'hide'
+  }, 350);
+  window.location = response.redirect;
+};
 
-require("bootstrap/dist/css/bootstrap.min.css");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+var sendAjax = function sendAjax(type, action, data, success) {
+  $.ajax({
+    cache: false,
+    type: type,
+    url: action,
+    data: data,
+    dataType: "json",
+    success: success,
+    error: function error(xhr, status, _error) {
+      var messageObj = JSON.parse(xhr.responseText);
+      handleError(messageObj.error);
+    }
+  });
+};
+"use strict";
 
 var handleLogin = function handleLogin(e) {
   e.preventDefault();
@@ -45,48 +67,48 @@ var handleSignup = function handleSignup(e) {
 };
 
 var LoginWindow = function LoginWindow(props) {
-  return (/*#__PURE__*/React.createElement(_Form["default"], {
+  return (/*#__PURE__*/React.createElement(ReactBootstrap.Card, null, /*#__PURE__*/React.createElement(ReactBootstrap.Card.Body, null, /*#__PURE__*/React.createElement(ReactBootstrap.Form, {
       onSubmit: handleLogin,
       action: "/login",
       method: "POST"
-    }, /*#__PURE__*/React.createElement(_Form["default"].Group, null, /*#__PURE__*/React.createElement(_Form["default"].Label, null, "Username"), /*#__PURE__*/React.createElement(_Form["default"].Control, {
+    }, /*#__PURE__*/React.createElement(ReactBootstrap.Form.Group, null, /*#__PURE__*/React.createElement(ReactBootstrap.Form.Label, null, "Username"), /*#__PURE__*/React.createElement(ReactBootstrap.Form.Control, {
       type: "email",
       placeholder: "Enter username"
-    })), /*#__PURE__*/React.createElement(_Form["default"].Group, null, /*#__PURE__*/React.createElement(_Form["default"].Label, null, "Password"), /*#__PURE__*/React.createElement(_Form["default"].Control, {
+    })), /*#__PURE__*/React.createElement(ReactBootstrap.Form.Group, null, /*#__PURE__*/React.createElement(ReactBootstrap.Form.Label, null, "Password"), /*#__PURE__*/React.createElement(ReactBootstrap.Form.Control, {
       type: "password",
       placeholder: "Enter password"
-    }), /*#__PURE__*/React.createElement(_Form["default"].Control, {
+    }), /*#__PURE__*/React.createElement(ReactBootstrap.Form.Control, {
       type: "hidden",
       name: "_csrf",
       value: props.csrf
-    })), /*#__PURE__*/React.createElement(_Button["default"], {
+    })), /*#__PURE__*/React.createElement(ReactBootstrap.Button, {
       variant: "primary",
       type: "submit"
-    }, "Submit"))
+    }, "Submit"))))
   );
 };
 
 var SignupWindow = function SignupWindow(props) {
   return (/*#__PURE__*/React.createElement("div", {
       id: "content2"
-    }, /*#__PURE__*/React.createElement(_Form["default"], {
+    }, /*#__PURE__*/React.createElement(ReactBootstrap.Form, {
       onSubmit: handleSignup,
       action: "/signup",
       method: "POST"
-    }, /*#__PURE__*/React.createElement(_Form["default"].Group, null, /*#__PURE__*/React.createElement(_Form["default"].Label, null, "Username"), /*#__PURE__*/React.createElement(_Form["default"].Control, {
+    }, /*#__PURE__*/React.createElement(ReactBootstrap.Form.Group, null, /*#__PURE__*/React.createElement(ReactBootstrap.Form.Label, null, "Username"), /*#__PURE__*/React.createElement(ReactBootstrap.Form.Control, {
       type: "email",
       placeholder: "Enter username"
-    })), /*#__PURE__*/React.createElement(_Form["default"].Group, null, /*#__PURE__*/React.createElement(_Form["default"].Label, null, "Password"), /*#__PURE__*/React.createElement(_Form["default"].Control, {
+    })), /*#__PURE__*/React.createElement(ReactBootstrap.Form.Group, null, /*#__PURE__*/React.createElement(ReactBootstrap.Form.Label, null, "Password"), /*#__PURE__*/React.createElement(ReactBootstrap.Form.Control, {
       type: "password",
       placeholder: "Enter password"
-    })), /*#__PURE__*/React.createElement(_Form["default"].Group, null, /*#__PURE__*/React.createElement(_Form["default"].Label, null, "Password"), /*#__PURE__*/React.createElement(_Form["default"].Control, {
+    })), /*#__PURE__*/React.createElement(ReactBootstrap.Form.Group, null, /*#__PURE__*/React.createElement(Form.Label, null, "Password"), /*#__PURE__*/React.createElement(Form.Control, {
       type: "password",
       placeholder: "Enter password"
-    })), /*#__PURE__*/React.createElement(_Form["default"].Control, {
+    })), /*#__PURE__*/React.createElement(ReactBootstrap.Form.Control, {
       type: "hidden",
       name: "_csrf",
       value: props.csrf
-    }), /*#__PURE__*/React.createElement(_Button["default"], {
+    }), /*#__PURE__*/React.createElement(ReactBootstrap.Button, {
       variant: "primary",
       type: "submit"
     }, "Submit")))
@@ -130,33 +152,3 @@ var getToken = function getToken() {
 $(document).ready(function () {
   getToken();
 });
-"use strict";
-
-var handleError = function handleError(message) {
-  $("#errorMessage").text(message);
-  $("#reptileMessage").animate({
-    width: 'toggle'
-  }, 350);
-};
-
-var redirect = function redirect(response) {
-  $("reptileMessage").animate({
-    width: 'hide'
-  }, 350);
-  window.location = response.redirect;
-};
-
-var sendAjax = function sendAjax(type, action, data, success) {
-  $.ajax({
-    cache: false,
-    type: type,
-    url: action,
-    data: data,
-    dataType: "json",
-    success: success,
-    error: function error(xhr, status, _error) {
-      var messageObj = JSON.parse(xhr.responseText);
-      handleError(messageObj.error);
-    }
-  });
-};
