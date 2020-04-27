@@ -15,29 +15,32 @@
               integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
               crossorigin="anonymous"
               />
-        <script src="https://unpkg.com/react/umd/react.production.min.js" crossorigin> </script>
-        <script
-                src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"
-                crossorigin
-                >
-        </script>
-        <script
-                src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js"
-                crossorigin
-                >
-        </script>
-        <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
 
+        <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
     </head>
-    <body> 
+    <body>
+        <section id="navbar"></section>
+<!--
         <nav><a href="/login"><img id="logo" src="/assets/img/iguana.jpg" alt="face logo"/></a>
             <div class="navlink"><a id="loginButton" href="/login">Login</a></div>
             <div class="navlink"><a id="signupButton" href="/signup">Sign up</a></div>
         </nav>
+-->
         <section id="content"></section>
         <div id="reptileMessage"><img id="speech" src="/assets/img/speech.png" alt="speech box"/>
             <h3><span id="errorMessage">Wrong username or password</span></h3><img id="reptile" src="assets/img/iguana.jpg" alt="reptile"/>
         </div>
         <script src="/assets/loginBundle.js"></script>
     </body>
+    <script src="https://unpkg.com/react/umd/react.production.min.js" crossorigin> </script>
+    <script
+            src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"
+            crossorigin
+            >
+    </script>
+    <script
+            src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js"
+            crossorigin
+            >
+    </script>
 </html>

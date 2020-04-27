@@ -1,39 +1,48 @@
+let removeAds = false;
+
 const handleReptile = (e) => {
     e.preventDefault();
-    
+
     $("#reptileMessage").animate({width:'hide'}, 350);
-    
+
     if($("#reptileName").val() == '' || $("#reptileAge").val() == '' || $("#reptileDescription").val() == '') {
         handleError("All fields are required");
         return false;
     }
-    
+
     sendAjax('POST', $("reptileForm").attr("action"), $("#reptileForm").serialize(), function() {
         loadReptilesFromServer();
     });
-    
+
     return false;
 };
 
 const ReptileForm = (props) => {
     return (
-        <form id="reptileForm"
-              onSubmit={handleReptile}
-              name="reptileForm"
-              action="/maker"
-              method="POST"
-              className="reptileForm"
-              style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}
-        >
-            <label htmlFor="name">Name: </label>
-            <input id="reptileName" type="text" name="name" placeholder="Reptile Name"/>
-            <label htmlFor="age">Age: </label>
-            <input id="reptileAge" type="text" name="age" placeholder="Reptile Age"/>
-            <label htmlFor="description">Description: </label>
-            <input id="reptileDescription" type="text" name="description" placeholder="Reptile Description"/>
-            <input type="hidden" name="_csrf" value={props.csrf} />
-            <input className="makeReptileSubmit" type="submit" value="Make Reptile" />
-        </form>
+        <ReactBootstrap.Form id="reptileForm"
+            onSubmit={handleReptile}
+            name="reptileForm"
+            action="/maker"
+            method="POST"
+            className="reptileForm"
+            >
+            <ReactBootstrap.Form.Group class="reptileFormGroup">
+                <ReactBootstrap.Form.Label htmlFor="name">Name: </ReactBootstrap.Form.Label>
+                <ReactBootstrap.Form.Control id="reptileName" type="text" name="name" placeholder="Reptile Name"/>
+            </ReactBootstrap.Form.Group>
+            <ReactBootstrap.Form.Group class="reptileFormGroup">
+                <ReactBootstrap.Form.Label htmlFor="age">Age: </ReactBootstrap.Form.Label>
+                <ReactBootstrap.Form.Control id="reptileAge" type="text" name="age" placeholder="Reptile Age"/>
+            </ReactBootstrap.Form.Group>
+            <ReactBootstrap.Form.Group class="reptileFormGroup">
+                <ReactBootstrap.Form.Label htmlFor="description">Description: </ReactBootstrap.Form.Label>
+                <ReactBootstrap.Form.Control id="reptileDescription" type="text" name="description" placeholder="Reptile Description"/>
+            </ReactBootstrap.Form.Group>
+            <ReactBootstrap.Form.Group class="reptileFormGroup" id="reptileButton">
+                <ReactBootstrap.Form.Control type="hidden" name="_csrf" value={props.csrf} />
+                <ReactBootstrap.Button variant="primary" classname="makeReptileSubmit" type="submit" value="Make Reptile">Make Reptile</ReactBootstrap.Button>
+            </ReactBootstrap.Form.Group>
+        </ReactBootstrap.Form>
     );
 };
 
@@ -45,22 +54,23 @@ const ReptileList = function(props) {
             </div>
         );
     }
-    
+
     const reptileNodes = props.reptiles.map(function(reptile) {
         return (
-            <div key={reptile._id} className="reptile">
-                <img src="/assets/img/iguana.jpg" alt="reptile face" className="reptileFace" />
-                <h3 className="reptileName"> Name: {reptile.name} </h3>
-                <h3 className="reptileAge"> Age: {reptile.age} </h3>
-                <h3 className="reptileDescription"> Description: {reptile.description} </h3>
-            </div>
+            <ReactBootstrap.Card key={reptile._id} className="reptile">
+                <ReactBootstrap.Card.Header>{reptile.name}</ReactBootstrap.Card.Header>
+                <ReactBootstrap.ListGroup variant="flush">
+                    <ReactBootstrap.ListGroup.Item>Age: {reptile.age}</ReactBootstrap.ListGroup.Item>
+                    <ReactBootstrap.ListGroup.Item>Description: {reptile.description}</ReactBootstrap.ListGroup.Item>
+                </ReactBootstrap.ListGroup>
+            </ReactBootstrap.Card>
         );
     });
-    
+
     return (
-        <div className="reptileList">
+        <ReactBootstrap.CardDeck className="reptileList">
             {reptileNodes}
-        </div>
+        </ReactBootstrap.CardDeck>
     );
 }
 
@@ -72,16 +82,65 @@ const loadReptilesFromServer = () => {
     });
 };
 
+const NavBar = () => {
+    return(
+        <ReactBootstrap.Navbar>
+            <ReactBootstrap.Navbar.Brand href="/maker">Reptile Recollection</ReactBootstrap.Navbar.Brand>
+            <ReactBootstrap.Nav.Link id="loginButton" href="/login">Login</ReactBootstrap.Nav.Link>
+            <ReactBootstrap.Nav.Link id="signupButton" href="/signup">Sign Up</ReactBootstrap.Nav.Link>
+            <ReactBootstrap.Button variant="primary" onClick={onClickRemoveAdsButton} id="removeAdsButton">Remove Ads</ReactBootstrap.Button>
+        </ReactBootstrap.Navbar>
+    );
+};
+
+const onClickRemoveAdsButton = () => {
+    removeAds = true;
+};
+
+const AdSpace = () => {
+    return(
+        <ReactBootstrap.Carousel>
+            <ReactBootstrap.Carousel.Item>
+                <img src="assets/img/Ad1.png" alt="Advertisement 1"/>
+            </ReactBootstrap.Carousel.Item>
+            <ReactBootstrap.Carousel.Item>
+                <img src="assets/img/Ad2.png" alt="Advertisement 2"/>
+            </ReactBootstrap.Carousel.Item>
+            <ReactBootstrap.Carousel.Item>
+                <img src="assets/img/Ad3.png" alt="Advertisement 3"/>
+            </ReactBootstrap.Carousel.Item>
+        </ReactBootstrap.Carousel>
+    );
+};
+
+const createAdSpace = () => {
+    if(!removeAds){
+        ReactDOM.render(
+            <AdSpace/>,
+            document.querySelector("#adspace")
+        );
+    }
+};
+
+const createNavBar = () => {
+    ReactDOM.render(
+        <NavBar/>,
+        document.querySelector("#navbar")
+    );
+};
+
 const setup = function(csrf) {
+    createNavBar();
     ReactDOM.render(
         <ReptileForm csrf={csrf} />, document.querySelector("#makeReptile")
     );
-    
+
     ReactDOM.render(
         <ReptileList reptiles={[]} />, document.querySelector("#reptiles")
     );
-    
+
     loadReptilesFromServer();
+    createAdSpace();
 };
 
 const getToken = () => {

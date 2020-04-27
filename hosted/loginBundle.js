@@ -1,5 +1,35 @@
 "use strict";
 
+var handleError = function handleError(message) {
+  $("#errorMessage").text(message);
+  $("#reptileMessage").animate({
+    width: 'toggle'
+  }, 350);
+};
+
+var redirect = function redirect(response) {
+  $("reptileMessage").animate({
+    width: 'hide'
+  }, 350);
+  window.location = response.redirect;
+};
+
+var sendAjax = function sendAjax(type, action, data, success) {
+  $.ajax({
+    cache: false,
+    type: type,
+    url: action,
+    data: data,
+    dataType: "json",
+    success: success,
+    error: function error(xhr, status, _error) {
+      var messageObj = JSON.parse(xhr.responseText);
+      handleError(messageObj.error);
+    }
+  });
+};
+"use strict";
+
 var handleLogin = function handleLogin(e) {
   e.preventDefault();
   $("reptileMessage").animate({
@@ -37,13 +67,15 @@ var handleSignup = function handleSignup(e) {
 };
 
 var LoginWindow = function LoginWindow(props) {
-  return (/*#__PURE__*/React.createElement(ReactBootstrap.Form, {
+  return (/*#__PURE__*/React.createElement("div", {
+      id: "content1"
+    }, /*#__PURE__*/React.createElement(ReactBootstrap.Form, {
       id: "loginForm",
       name: "loginForm",
       onSubmit: handleLogin,
       action: "/login",
       method: "POST",
-      className: "mainForm"
+      classname: "mainForm"
     }, /*#__PURE__*/React.createElement(ReactBootstrap.Form.Group, null, /*#__PURE__*/React.createElement(ReactBootstrap.Form.Label, null, "Username"), /*#__PURE__*/React.createElement(ReactBootstrap.Form.Control, {
       id: "user",
       type: "text",
@@ -54,14 +86,15 @@ var LoginWindow = function LoginWindow(props) {
       type: "password",
       name: "pass",
       placeholder: "password"
-    }), /*#__PURE__*/React.createElement(ReactBootstrap.Form.Control, {
+    })), /*#__PURE__*/React.createElement(ReactBootstrap.Form.Control, {
       type: "hidden",
       name: "_csrf",
       value: props.csrf
-    })), /*#__PURE__*/React.createElement(ReactBootstrap.Button, {
+    }), /*#__PURE__*/React.createElement(ReactBootstrap.Button, {
       variant: "primary",
-      type: "submit"
-    }, "Submit"))
+      type: "submit",
+      value: "Login"
+    }, "Submit")))
   );
 };
 
@@ -96,10 +129,22 @@ var SignupWindow = function SignupWindow(props) {
       value: props.csrf
     }), /*#__PURE__*/React.createElement(ReactBootstrap.Button, {
       variant: "primary",
-      className: "formSubmit",
       type: "submit",
       value: "Sign up"
     }, "Submit")))
+  );
+};
+
+var NavBar = function NavBar() {
+  return (/*#__PURE__*/React.createElement(ReactBootstrap.Navbar, null, /*#__PURE__*/React.createElement(ReactBootstrap.Navbar.Brand, {
+      href: "/maker"
+    }, "Reptile Recollection"), /*#__PURE__*/React.createElement(ReactBootstrap.Nav.Link, {
+      id: "loginButton",
+      href: "/login"
+    }, "Login"), /*#__PURE__*/React.createElement(ReactBootstrap.Nav.Link, {
+      id: "signupButton",
+      href: "/signup"
+    }, "Sign Up"))
   );
 };
 
@@ -115,7 +160,12 @@ var createSignupWindow = function createSignupWindow(csrf) {
   }), document.querySelector("#content"));
 };
 
+var createNavBar = function createNavBar() {
+  ReactDOM.render( /*#__PURE__*/React.createElement(NavBar, null), document.querySelector("#navbar"));
+};
+
 var setup = function setup(csrf) {
+  createNavBar();
   var loginButton = document.querySelector("#loginButton");
   var signupButton = document.querySelector("#signupButton");
   signupButton.addEventListener("click", function (e) {
@@ -140,33 +190,3 @@ var getToken = function getToken() {
 $(document).ready(function () {
   getToken();
 });
-"use strict";
-
-var handleError = function handleError(message) {
-  $("#errorMessage").text(message);
-  $("#reptileMessage").animate({
-    width: 'toggle'
-  }, 350);
-};
-
-var redirect = function redirect(response) {
-  $("reptileMessage").animate({
-    width: 'hide'
-  }, 350);
-  window.location = response.redirect;
-};
-
-var sendAjax = function sendAjax(type, action, data, success) {
-  $.ajax({
-    cache: false,
-    type: type,
-    url: action,
-    data: data,
-    dataType: "json",
-    success: success,
-    error: function error(xhr, status, _error) {
-      var messageObj = JSON.parse(xhr.responseText);
-      handleError(messageObj.error);
-    }
-  });
-};

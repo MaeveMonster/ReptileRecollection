@@ -37,25 +37,28 @@ const handleSignup = (e) => {
 
 const LoginWindow = (props) => {
     return (
-        <ReactBootstrap.Form
-            id="loginForm" 
-            name="loginForm"
-            onSubmit={handleLogin}
-            action="/login"
-            method="POST"
-            className="mainForm"
-            >
-            <ReactBootstrap.Form.Group>
-                <ReactBootstrap.Form.Label>Username</ReactBootstrap.Form.Label>
-                <ReactBootstrap.Form.Control id="user" type="text" name="username" placeholder="username"/>
-            </ReactBootstrap.Form.Group>
-            <ReactBootstrap.Form.Group>
-                <ReactBootstrap.Form.Label>Password</ReactBootstrap.Form.Label>
-                <ReactBootstrap.Form.Control id="pass" type="password" name="pass" placeholder="password"/>
+        <div id="content1">
+            <ReactBootstrap.Form
+                id="loginForm"
+                name="loginForm"
+                onSubmit={handleLogin}
+                action="/login"
+                method="POST"
+                classname="mainForm"
+                >
+                <ReactBootstrap.Form.Group>
+                    <ReactBootstrap.Form.Label>Username</ReactBootstrap.Form.Label>
+                    <ReactBootstrap.Form.Control id="user" type="text" name="username" placeholder="username"/>
+                </ReactBootstrap.Form.Group>
+                <ReactBootstrap.Form.Group>
+                    <ReactBootstrap.Form.Label>Password</ReactBootstrap.Form.Label>
+                    <ReactBootstrap.Form.Control id="pass" type="password" name="pass" placeholder="password"/>
+                </ReactBootstrap.Form.Group>
                 <ReactBootstrap.Form.Control type="hidden" name="_csrf" value={props.csrf}/>
-            </ReactBootstrap.Form.Group>
-            <ReactBootstrap.Button variant="primary" type="submit">Submit</ReactBootstrap.Button>
-        </ReactBootstrap.Form>
+                <ReactBootstrap.Button variant="primary" type="submit" value="Login">Submit</ReactBootstrap.Button>
+            </ReactBootstrap.Form>
+        </div>
+
     );
 };
 
@@ -83,12 +86,22 @@ const SignupWindow = (props) => {
                     <ReactBootstrap.Form.Control id="pass2" type="password" name="pass2" placeholder="retype password"/>
                 </ReactBootstrap.Form.Group>
                 <ReactBootstrap.Form.Control type="hidden" name="_csrf" value={props.csrf}/>
-                <ReactBootstrap.Button variant="primary"className="formSubmit" type="submit" value="Sign up">Submit</ReactBootstrap.Button>
+                <ReactBootstrap.Button variant="primary" type="submit" value="Sign up">Submit</ReactBootstrap.Button>
             </ReactBootstrap.Form>
         </div>
 
     );
 };
+
+const NavBar = () => {
+    return(
+        <ReactBootstrap.Navbar>
+            <ReactBootstrap.Navbar.Brand href="/maker">Reptile Recollection</ReactBootstrap.Navbar.Brand>
+            <ReactBootstrap.Nav.Link id="loginButton" href="/login">Login</ReactBootstrap.Nav.Link>
+            <ReactBootstrap.Nav.Link id="signupButton" href="/signup">Sign Up</ReactBootstrap.Nav.Link>
+        </ReactBootstrap.Navbar>
+    );
+}
 
 const createLoginWindow = (csrf) => {
     ReactDOM.render(
@@ -104,7 +117,15 @@ const createSignupWindow = (csrf) => {
     );
 };
 
+const createNavBar = () => {
+    ReactDOM.render(
+        <NavBar/>,
+        document.querySelector("#navbar")
+    );
+};
+
 const setup = (csrf) => {
+    createNavBar();
     const loginButton = document.querySelector("#loginButton");
     const signupButton = document.querySelector("#signupButton");
 

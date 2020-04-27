@@ -48,6 +48,7 @@ nav:nth-child(1) {
     background-color: #fefbdc;
 }
 
+/*
 .reptileForm {
     border: 2px solid #fefbdc;
     height: 30%;
@@ -90,6 +91,7 @@ nav:nth-child(1) {
     transition: background-color 0.4s ease;
     background-color: #fefbdc;
 }
+*/
 
 .mainForm {
     height: 300px;
@@ -139,6 +141,7 @@ nav:nth-child(1) {
 .reptileList{
     display: flex;
     flex-direction: row;
+    justify-content: center;
     flex-wrap: wrap;
 }
 
@@ -158,10 +161,39 @@ nav:nth-child(1) {
     align-items: center;
 }
 
+#reptileForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border: 2px solid #fefbdc;
+    background-color: #a9cd39;
+    margin-block-end: 1em;
+    margin-block-start: 1em;
+}
+
+#makeReptileSubmit {
+    height: 50%;
+}
+
+.form-group {
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
 #makeReptile {
     display: flex;
     flex-direction: row;
     justify-content: center;
+}
+
+#reptileButton {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.card {
+    min-width: 20em;
+    max-width: 20em;
 }
 
 #user, #pass, #pass2 {
@@ -207,6 +239,16 @@ nav:nth-child(1) {
     font-style: italic;
 }
 
+#adspace {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#removeAdsButton {
+    margin-left: auto;
+}
+
 #reptile {
     z-index: 225;
     margin-top: -20px;
@@ -222,7 +264,8 @@ nav:nth-child(1) {
     width: 100%;
     min-width: 400px;
     margin: 0 auto;
-    margin-top: 100px;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 .reptile {
