@@ -1,5 +1,6 @@
 let removeAds = false;
 
+//handles creating a reptile
 const handleReptile = (e) => {
     e.preventDefault();
 
@@ -17,6 +18,7 @@ const handleReptile = (e) => {
     return false;
 };
 
+//reptile creation form
 const ReptileForm = (props) => {
     return (
         <ReactBootstrap.Form id="reptileForm"
@@ -46,6 +48,7 @@ const ReptileForm = (props) => {
     );
 };
 
+//list of reptiles to display
 const ReptileList = function(props) {
     if(props.reptiles.length === 0) {
         return (
@@ -54,7 +57,8 @@ const ReptileList = function(props) {
             </div>
         );
     }
-
+    
+    //individual reptiles
     const reptileNodes = props.reptiles.map(function(reptile) {
         return (
             <ReactBootstrap.Card key={reptile._id} className="reptile">
@@ -75,6 +79,7 @@ const ReptileList = function(props) {
     );
 }
 
+//loading reptiles from server
 const loadReptilesFromServer = () => {
     sendAjax('GET', '/getReptiles', null, (data) => {
         ReactDOM.render(
@@ -83,6 +88,7 @@ const loadReptilesFromServer = () => {
     });
 };
 
+//navigation bar
 const NavBar = () => {
     return(
         <ReactBootstrap.Navbar>
@@ -93,11 +99,13 @@ const NavBar = () => {
     );
 };
 
+//when the remove ads button is clicked change the boolean
 const onClickRemoveAdsButton = () => {
     removeAds = true;
     createAdSpace();
 };
 
+//the carousel for ad content
 const AdSpace = () => {
     return(
         <ReactBootstrap.Carousel>
@@ -114,6 +122,7 @@ const AdSpace = () => {
     );
 };
 
+//creating the ad space only if the user has not removed ads
 const createAdSpace = () => {
     if(removeAds){
         ReactDOM.render(
@@ -128,6 +137,7 @@ const createAdSpace = () => {
     }
 };
 
+//create the nav bar
 const createNavBar = () => {
     ReactDOM.render(
         <NavBar/>,
@@ -135,6 +145,7 @@ const createNavBar = () => {
     );
 };
 
+//set up the page on startup
 const setup = function(csrf) {
     createNavBar();
     ReactDOM.render(
@@ -149,6 +160,7 @@ const setup = function(csrf) {
     createAdSpace();
 };
 
+//getting the csrf token
 const getToken = () => {
     sendAjax('GET', '/getToken', null, (result) => {
         setup(result.csrfToken);

@@ -22,6 +22,7 @@ const mongooseOptions = {
   useUnifiedTopology: true,
 };
 
+//connect to database
 mongoose.connect(dbURL, mongooseOptions, (err) => {
   if (err) {
     console.log('Could not connect to database');

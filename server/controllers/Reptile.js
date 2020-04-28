@@ -2,6 +2,7 @@ const models = require('../models');
 
 const { Reptile } = models;
 
+//renders login page
 const makerPage = (req, res) => {
   Reptile.ReptileModel.findByOwner(req.session.account._id, (err, docs) => {
     if (err) {
@@ -13,6 +14,7 @@ const makerPage = (req, res) => {
   });
 };
 
+//creates a reptile
 const makeReptile = (req, res) => {
   if (!req.body.name || !req.body.age || !req.body.description) {
     return res.status(400).json({ error: 'Name, age, and description are required' });
@@ -43,6 +45,7 @@ const makeReptile = (req, res) => {
   return reptilePromise;
 };
 
+//retrieves reptiles from the server
 const getReptiles = (request, response) => {
   const req = request;
   const res = response;

@@ -42,12 +42,14 @@ const ReptileSchema = new mongoose.Schema({
   },
 });
 
+//sends reptile data in a doc to the API
 ReptileSchema.statics.toAPI = (doc) => ({
   name: doc.name,
   age: doc.age,
   description: doc.description,
 });
 
+//finds all the reptiles an certain user has
 ReptileSchema.statics.findByOwner = (ownerId, callback) => {
   const search = {
     owner: convertId(ownerId),

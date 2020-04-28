@@ -1,3 +1,4 @@
+//prevents user from doing certain actions unless they are logged in
 const requiresLogin = (req, res, next) => {
   if (!req.session.account) {
     return res.redirect('/');
@@ -5,6 +6,7 @@ const requiresLogin = (req, res, next) => {
   return next();
 };
 
+//prevents user from doing certain actions unless they are logged out
 const requiresLogout = (req, res, next) => {
   if (req.session.account) {
     return res.redirect('/maker');
@@ -12,6 +14,7 @@ const requiresLogout = (req, res, next) => {
   return next();
 };
 
+//requires csrf security to do the action
 const requiresSecure = (req, res, next) => {
   if (req.headers['x-forwarded-proto'] !== 'https') {
     return res.redirect(`https://${req.hostname}${req.url}`);
@@ -19,6 +22,7 @@ const requiresSecure = (req, res, next) => {
   return next();
 };
 
+//bypasses security check
 const bypassSecure = (req, res, next) => {
   next();
 };

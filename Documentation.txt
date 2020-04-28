@@ -1,8 +1,21 @@
-My website is an expansion of DomoMaker. The purpose is for users to be able to keep a personal log of the super 
-cute reptiles they find throughout their days. They may give each reptile a name, age, and description. When the 
-project is finished the user will also be able to add pictures of the reptiles they find.
+<IMPORTANT NOTE>
+I lost my only source of income due to COVID-19 and so have been frantically hunting for a job since then. Because
+of this time I've lost to job-hunting, my project is severely lacking. I understand the penalties I will incurr
+because of the missing parts of my project, but merely ask that Professor Willoughby take mercy on me by bestowing
+a passing grade. If I fail this class I won't graduate this semester as I have planned, and so will have to take
+out another loan, because I don't currently have income, to take this class online over the summer. I understand I
+should have brought this to Professor Willoughby's attention earlier, like when I lost my job, but I thought I
+would be able to find another job quickly and move on no problem. Unfortunately it didn't work out that way. I'm
+sorry I didn't let you know sooner, Professor.
+</IMPORTANT NOTE>
 
-The completed version of the website will have space for advertisements in the margins, and an option for the
+My website is an expansion of DomoMaker. The purpose is for users to be able to keep a personal log of the super 
+cute reptiles they find throughout their days. They may give each reptile a name, age, and description. Although I
+intended for users to be able to add images of the reptiles they find, I was unable to implement that feature in
+time, and so instead when the user creates a reptile, an image of an iguana appears on the reptile's information
+card.
+
+The website has space for advertisements, and an option for the
 user to pay to remove the ads.
 
 React is being used to control the Reptiles that are being displayed.
@@ -11,7 +24,11 @@ Mongo is being used to store Reptiles and Accounts.
 
 Handlebars is being used to form the framework of the app's pages.
 
-Going forward I will polish the site's asthetics and add the image feature, as well as add specifically marked
-areas for advertisements. There will also be a button marked "Remove Ads" in the top right corner of the app.
-Once the user clicks that button, all the 'ad spaces' will disappear and the app will look much cleaner and less 
-cluttered.
+Known issues:
+My app doesn't implement a change password function.
+My app doesn't remember which users have paid to remove ads and which users have not. So everytime a user logs out
+they have to click the Remove Ads button again when they log back in.
+
+If I were to continue this project I definitely would like to at least implement the images feature that I had
+planned to do. I would also implement the requirements I am missing. I would also continue tweaking the front end 
+to look nicer as I get better at design and using React/Bootstrap.

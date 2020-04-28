@@ -1,3 +1,4 @@
+//logs user in
 const handleLogin = (e) => {
     e.preventDefault();
 
@@ -15,6 +16,7 @@ const handleLogin = (e) => {
     return false;
 };
 
+//signs user up
 const handleSignup = (e) => {
     e.preventDefault();
 
@@ -35,6 +37,7 @@ const handleSignup = (e) => {
     return false;
 };
 
+//the login window
 const LoginWindow = (props) => {
     return (
         <div id="content1">
@@ -62,6 +65,7 @@ const LoginWindow = (props) => {
     );
 };
 
+//the sign up window
 const SignupWindow = (props) => {
     return (
         <div id="content2">
@@ -93,6 +97,7 @@ const SignupWindow = (props) => {
     );
 };
 
+//the navigation bar
 const NavBar = () => {
     return(
         <ReactBootstrap.Navbar>
@@ -103,6 +108,7 @@ const NavBar = () => {
     );
 }
 
+//create login window
 const createLoginWindow = (csrf) => {
     ReactDOM.render(
         <LoginWindow csrf={csrf} />,
@@ -110,6 +116,7 @@ const createLoginWindow = (csrf) => {
     );
 };
 
+//creates sign up window
 const createSignupWindow = (csrf) => {
     ReactDOM.render(
         <SignupWindow csrf={csrf} />,
@@ -117,6 +124,7 @@ const createSignupWindow = (csrf) => {
     );
 };
 
+//creates navigation bar
 const createNavBar = () => {
     ReactDOM.render(
         <NavBar/>,
@@ -124,6 +132,7 @@ const createNavBar = () => {
     );
 };
 
+//sets up the page on start up
 const setup = (csrf) => {
     createNavBar();
     const loginButton = document.querySelector("#loginButton");
@@ -144,6 +153,7 @@ const setup = (csrf) => {
     createLoginWindow(csrf); //default view
 };
 
+//gets the csrf token
 const getToken = () => {
     sendAjax('GET', '/getToken', null, (result) => {
         setup(result.csrfToken);
