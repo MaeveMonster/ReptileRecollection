@@ -4,7 +4,7 @@ html, body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    background-color: #fefbdc;
+    background-color: #6f7c85;
 }
 
 #logo {
@@ -18,44 +18,73 @@ html, body {
 nav {
     width: 100%;
     height: 50px;
-    background-color: #a9cd39;
+    background-color: #58641d;
 }
 
 nav:nth-child(1) {
     padding-left: 25px;
 }
 
-.navlink {
-    padding: 5px;
-    padding-top: 12px;
-    padding-left: 20px;
-    color: #8d8232;
+.nav-link {
+    color: #FFFFFF;
     font-size: 1.3em;
-    float: left;
 }
 
-.navlink a, .navlink a:link, .navlink a:visited, .navlink a:hover, .navlink a:active {
-    color: #8d8232;
+.nav-link:hover {
+    color: #7b904b
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #273b09;
+    border-color: #273b09;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #7b904b;
+    border-color: #7b904b;
+}
+
+.navbar-light .navbar-brand {
+    color: #FFFFFF;
+    font-size: 1.3em;
+}
+
+.navbar-brand:hover {
+    color: #7b904b;
+}
+
+.card-header {
+    color: white;
+}
+
+label {
+    margin-bottom: 0;
+    color: white;
+}
+
+.nav-link a, .nav-link a:link, .nav-link a:visited, .nav-link a:hover, .nav-link a:active {
+    color: #FFFFFF;
     text-decoration: none;
-    padding: 5px;
     border-radius: 4px;
-    background-color: #a9cd39;
+    background-color: #58641d;
     transition: background-color 0.4s ease;
 }
 
-.navlink a:hover {
+.nav-link a:hover {
     transition: background-color 0.8s ease;
-    background-color: #fefbdc;
+    background-color: #6f7c85;
 }
 
 /*
 .reptileForm {
-    border: 2px solid #fefbdc;
+    border: 2px solid #6f7c85;
     height: 30%;
     width: 70%;
     margin-top:0px;
     padding-top:10px;
-    background-color: #a9cd39;
+    background-color: #58641d;
     border-bottom-right-radius: 4px;
     border-top-right-radius: 4px;
 }
@@ -66,7 +95,7 @@ nav:nth-child(1) {
     margin-left: 10px;
     font-size: 1.2em;
     float: left;
-    color: #8d8232;
+    color: #FFFFFF;
 }
 
 .reptileForm input[type=text] {
@@ -77,21 +106,30 @@ nav:nth-child(1) {
     transition: background-color 0.4s ease;
     display: inline;
     width: 90px;
-    background-color: #a9cd39;
+    background-color: #58641d;
     border-radius: 2px;
-    color: #8d8232;
+    color: #FFFFFF;
     text-decoration: none;
 }
 
 .makeReptileSubmit:link, .makeReptileSubmit:visited, .makeReptileSubmit:hover, .makeReptileSubmit:active {
-    color: #8d8232;
+    color: #FFFFFF;
 }
 
 .makeReptileSubmit:hover {
     transition: background-color 0.4s ease;
-    background-color: #fefbdc;
+    background-color: #6f7c85;
 }
 */
+
+#logoutButton {
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 4px;
+    background-color: #58641d;
+    transition: background-color 0.4s ease;
+}
 
 .mainForm {
     height: 300px;
@@ -121,21 +159,21 @@ nav:nth-child(1) {
     margin-top: 14px;
     font-size: 1.2em;
     width: 100px;
-    background-color: #a9cd39;
+    background-color: #58641d;
     border-radius: 2px;
-    border-color: #8d8232;
+    border-color: #FFFFFF;
     padding: 3px 0px;
-    color: #8d8232;
+    color: #FFFFFF;
     text-decoration: none;
 }
 
 .formSubmit:link, .formSubmit:visited, .formSubmit:hover, .formSubmit:active {
-    color: #8d8232;
+    color: #FFFFFF;
 }
 
 .formSubmit:hover {
     transition: background-color 0.4s ease;
-    background-color: #fefbdc;
+    background-color: #6f7c85;
 }
 
 .reptileList{
@@ -165,8 +203,8 @@ nav:nth-child(1) {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    border: 2px solid #fefbdc;
-    background-color: #a9cd39;
+    border: 2px solid #6f7c85;
+    background-color: #58641d;
     margin-block-end: 1em;
     margin-block-start: 1em;
 }
@@ -205,7 +243,7 @@ nav:nth-child(1) {
 
 #user:focus, #pass:focus, #pass2:focus {
     outline: none;
-    box-shadow: 0px 0px 1px 1px #a9cd39;
+    box-shadow: 0px 0px 1px 1px #58641d;
 }
 
 #reptileMessage {
@@ -273,9 +311,9 @@ nav:nth-child(1) {
     margin: 0 auto;
     margin-top: 2px;
     margin-bottom: 2px;
-    border: 2px solid #a9cd39;
+    border: 2px solid #58641d;
     border-radius: 4px;
-    background-color: #a9cd39;
+    background-color: #58641d;
     padding: 10px;
     min-height:60px;
     overflow: hidden;
@@ -283,9 +321,9 @@ nav:nth-child(1) {
 
 .reptile:hover {
     transition: border-color 0.2s ease-out;
-    border-color: #fefbdc;
+    border-color: #6f7c85;
     transition: background-color 2.6s ease-out;
-    background-color: #8d8232;
+    background-color: #575757;
 }
 
 img.reptileFace {

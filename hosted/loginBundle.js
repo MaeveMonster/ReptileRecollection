@@ -91,7 +91,6 @@ var LoginWindow = function LoginWindow(props) {
       name: "_csrf",
       value: props.csrf
     }), /*#__PURE__*/React.createElement(ReactBootstrap.Button, {
-      variant: "primary",
       type: "submit",
       value: "Login"
     }, "Submit")))
@@ -128,7 +127,6 @@ var SignupWindow = function SignupWindow(props) {
       name: "_csrf",
       value: props.csrf
     }), /*#__PURE__*/React.createElement(ReactBootstrap.Button, {
-      variant: "primary",
       type: "submit",
       value: "Sign up"
     }, "Submit")))

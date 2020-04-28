@@ -55,7 +55,7 @@ const LoginWindow = (props) => {
                     <ReactBootstrap.Form.Control id="pass" type="password" name="pass" placeholder="password"/>
                 </ReactBootstrap.Form.Group>
                 <ReactBootstrap.Form.Control type="hidden" name="_csrf" value={props.csrf}/>
-                <ReactBootstrap.Button variant="primary" type="submit" value="Login">Submit</ReactBootstrap.Button>
+                <ReactBootstrap.Button type="submit" value="Login">Submit</ReactBootstrap.Button>
             </ReactBootstrap.Form>
         </div>
 
@@ -86,7 +86,7 @@ const SignupWindow = (props) => {
                     <ReactBootstrap.Form.Control id="pass2" type="password" name="pass2" placeholder="retype password"/>
                 </ReactBootstrap.Form.Group>
                 <ReactBootstrap.Form.Control type="hidden" name="_csrf" value={props.csrf}/>
-                <ReactBootstrap.Button variant="primary" type="submit" value="Sign up">Submit</ReactBootstrap.Button>
+                <ReactBootstrap.Button type="submit" value="Sign up">Submit</ReactBootstrap.Button>
             </ReactBootstrap.Form>
         </div>
 

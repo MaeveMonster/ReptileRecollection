@@ -114,7 +114,10 @@ var ReptileList = function ReptileList(props) {
     return (/*#__PURE__*/React.createElement(ReactBootstrap.Card, {
         key: reptile._id,
         className: "reptile"
-      }, /*#__PURE__*/React.createElement(ReactBootstrap.Card.Header, null, reptile.name), /*#__PURE__*/React.createElement(ReactBootstrap.ListGroup, {
+      }, /*#__PURE__*/React.createElement(ReactBootstrap.Card.Img, {
+        variant: "top",
+        src: "assets/img/iguanaCard.png"
+      }), /*#__PURE__*/React.createElement(ReactBootstrap.Card.Header, null, reptile.name), /*#__PURE__*/React.createElement(ReactBootstrap.ListGroup, {
         variant: "flush"
       }, /*#__PURE__*/React.createElement(ReactBootstrap.ListGroup.Item, null, "Age: ", reptile.age), /*#__PURE__*/React.createElement(ReactBootstrap.ListGroup.Item, null, "Description: ", reptile.description)))
     );
@@ -137,13 +140,9 @@ var NavBar = function NavBar() {
   return (/*#__PURE__*/React.createElement(ReactBootstrap.Navbar, null, /*#__PURE__*/React.createElement(ReactBootstrap.Navbar.Brand, {
       href: "/maker"
     }, "Reptile Recollection"), /*#__PURE__*/React.createElement(ReactBootstrap.Nav.Link, {
-      id: "loginButton",
-      href: "/login"
-    }, "Login"), /*#__PURE__*/React.createElement(ReactBootstrap.Nav.Link, {
-      id: "signupButton",
-      href: "/signup"
-    }, "Sign Up"), /*#__PURE__*/React.createElement(ReactBootstrap.Button, {
-      variant: "primary",
+      id: "logoutButton",
+      href: "/logout"
+    }, "Logout"), /*#__PURE__*/React.createElement(ReactBootstrap.Button, {
       onClick: onClickRemoveAdsButton,
       id: "removeAdsButton"
     }, "Remove Ads"))
@@ -152,6 +151,7 @@ var NavBar = function NavBar() {
 
 var onClickRemoveAdsButton = function onClickRemoveAdsButton() {
   removeAds = true;
+  createAdSpace();
 };
 
 var AdSpace = function AdSpace() {
@@ -169,7 +169,9 @@ var AdSpace = function AdSpace() {
 };
 
 var createAdSpace = function createAdSpace() {
-  if (!removeAds) {
+  if (removeAds) {
+    ReactDOM.render(null, document.querySelector("#adspace"));
+  } else {
     ReactDOM.render( /*#__PURE__*/React.createElement(AdSpace, null), document.querySelector("#adspace"));
   }
 };

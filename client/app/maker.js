@@ -58,6 +58,7 @@ const ReptileList = function(props) {
     const reptileNodes = props.reptiles.map(function(reptile) {
         return (
             <ReactBootstrap.Card key={reptile._id} className="reptile">
+                <ReactBootstrap.Card.Img variant="top" src="assets/img/iguanaCard.png" />
                 <ReactBootstrap.Card.Header>{reptile.name}</ReactBootstrap.Card.Header>
                 <ReactBootstrap.ListGroup variant="flush">
                     <ReactBootstrap.ListGroup.Item>Age: {reptile.age}</ReactBootstrap.ListGroup.Item>
@@ -86,15 +87,15 @@ const NavBar = () => {
     return(
         <ReactBootstrap.Navbar>
             <ReactBootstrap.Navbar.Brand href="/maker">Reptile Recollection</ReactBootstrap.Navbar.Brand>
-            <ReactBootstrap.Nav.Link id="loginButton" href="/login">Login</ReactBootstrap.Nav.Link>
-            <ReactBootstrap.Nav.Link id="signupButton" href="/signup">Sign Up</ReactBootstrap.Nav.Link>
-            <ReactBootstrap.Button variant="primary" onClick={onClickRemoveAdsButton} id="removeAdsButton">Remove Ads</ReactBootstrap.Button>
+            <ReactBootstrap.Nav.Link id="logoutButton" href="/logout">Logout</ReactBootstrap.Nav.Link>
+            <ReactBootstrap.Button onClick={onClickRemoveAdsButton} id="removeAdsButton">Remove Ads</ReactBootstrap.Button>
         </ReactBootstrap.Navbar>
     );
 };
 
 const onClickRemoveAdsButton = () => {
     removeAds = true;
+    createAdSpace();
 };
 
 const AdSpace = () => {
@@ -114,7 +115,12 @@ const AdSpace = () => {
 };
 
 const createAdSpace = () => {
-    if(!removeAds){
+    if(removeAds){
+        ReactDOM.render(
+            null,
+            document.querySelector("#adspace")
+        );
+    } else {
         ReactDOM.render(
             <AdSpace/>,
             document.querySelector("#adspace")
